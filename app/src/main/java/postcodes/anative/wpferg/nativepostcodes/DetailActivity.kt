@@ -31,7 +31,7 @@ class DetailActivity : AppCompatActivity(), GetPostcodeDetail.ResponseHandler {
     override fun handlePostcodeDetailSuccess(result: PostcodeDetail) {
         LOGGER.info("Got postcode details " + result)
         val postcodeDetailFragment = PostcodeDetailFragment();
-        listContainer.adapter = PostcodeDetailViewAdapter(result)
+        listContainer.adapter = PostcodeDetailViewAdapter(result, baseContext)
     }
 
     override fun handlePostcodeDetailFailure() {

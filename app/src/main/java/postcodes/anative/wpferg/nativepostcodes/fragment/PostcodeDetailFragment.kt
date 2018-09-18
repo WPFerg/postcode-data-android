@@ -28,7 +28,7 @@ class PostcodeDetailFragment : Fragment() {
         if (view is RecyclerView) {
             with(view) {
                 layoutManager = LinearLayoutManager(context)
-                adapter = PostcodeDetailViewAdapter(arguments!!.get(POSTCODE_DETAIL) as PostcodeDetail)
+                adapter = PostcodeDetailViewAdapter(arguments!!.get(POSTCODE_DETAIL) as PostcodeDetail, context)
             }
         }
         return view

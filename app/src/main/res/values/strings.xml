@@ -3,4 +3,11 @@
     <string name="search_postcode">Search Postcode</string>
 
     <string name="postcode_details_for">Postcode Details for</string>
+    <string name="detail_quality">Quality</string>
+    <string name="detail_parish">Parish</string>
+    <string name="detail_country">Country</string>
+    <string name="detail_constituency">Parliamentary Constituency</string>
+    <string name="detail_european_constituency">European Electoral Region</string>
+    <string name="detail_ccg">Clinical Commissioning Group</string>
+    <string name="detail_pct">Primary Care Trust</string>
 </resources>

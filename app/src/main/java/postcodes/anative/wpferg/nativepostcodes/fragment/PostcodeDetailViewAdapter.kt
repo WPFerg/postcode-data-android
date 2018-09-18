@@ -1,6 +1,6 @@
 package postcodes.anative.wpferg.nativepostcodes.fragment
 
-
+import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +10,7 @@ import kotlinx.android.synthetic.main.fragment_postcodedetail.view.*
 import postcodes.anative.wpferg.nativepostcodes.R
 import postcodes.anative.wpferg.nativepostcodes.domain.PostcodeDetail
 
-/**
- * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
- * specified [OnListFragmentInteractionListener].
- * TODO: Replace the implementation with code for your data type.
- */
-class PostcodeDetailViewAdapter(private val detail: PostcodeDetail)
+class PostcodeDetailViewAdapter(private val detail: PostcodeDetail, private val context: Context)
     : RecyclerView.Adapter<PostcodeDetailViewAdapter.ViewHolder>() {
 
     val convertedDetail = convertDetail(detail)
@@ -49,13 +44,16 @@ class PostcodeDetailViewAdapter(private val detail: PostcodeDetail)
 
     private fun convertDetail(detail: PostcodeDetail): List<Pair<String, String>> {
         return listOf(
-            Pair("Quality", detail.quality.toString()),
-            Pair("Parish", detail.parish),
-            Pair("Country", detail.country),
-            Pair("Parliamentary Constituency", detail.parliamentaryConstituency),
-            Pair("European Electoral Region", detail.europeanElectoralRegion),
-            Pair("Clinical Commissioning Group", detail.ccg),
-            Pair("Primary Care Trust", detail.primaryCareTrust)
+            Pair(getString(R.string.detail_quality), detail.quality.toString()),
+            Pair(getString(R.string.detail_parish), detail.parish),
+            Pair(getString(R.string.detail_country), detail.country),
+            Pair(getString(R.string.detail_constituency), detail.parliamentaryConstituency),
+            Pair(getString(R.string.detail_european_constituency), detail.europeanElectoralRegion),
+            Pair(getString(R.string.detail_ccg), detail.ccg),
+            Pair(getString(R.string.detail_pct), detail.primaryCareTrust)
         )
     }
+
+    private fun getString(asset: Int): String = context.getString(asset)
+
 }

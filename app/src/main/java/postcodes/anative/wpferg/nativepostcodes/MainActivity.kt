@@ -7,29 +7,23 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.*
+import kotlinx.android.synthetic.main.activity_main.*
 import postcodes.anative.wpferg.nativepostcodes.http.SearchPostcode
 import java.util.logging.Logger
 
 class MainActivity : AppCompatActivity(), SearchPostcode.ResponseHandler {
 
-    var searchText: EditText? = null
-    var progressBar: ProgressBar? = null
-    var listView: ListView? = null
     val LOGGER = Logger.getLogger(MainActivity::class.java.name)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        searchText = findViewById<EditText>(R.id.searchPostcode)
-        progressBar = findViewById<ProgressBar>(R.id.searchSpinner)
-        listView = findViewById<ListView>(R.id.resultView)
-
-        listView!!.onItemClickListener = AdapterView.OnItemClickListener {
+        resultView.onItemClickListener = AdapterView.OnItemClickListener {
             adapterView, view, index, p3 -> launchDetailView(adapterView.getItemAtPosition(index) as String)
         }
 
-        searchText!!.addTextChangedListener(object: TextWatcher {
+        searchPostcode.addTextChangedListener(object: TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
             }
 
@@ -51,7 +45,7 @@ class MainActivity : AppCompatActivity(), SearchPostcode.ResponseHandler {
         loading(false)
         val normalisedResult: Array<String> = if (result == null) emptyArray() else result
         var adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, normalisedResult)
-        listView!!.adapter = adapter
+        resultView!!.adapter = adapter
     }
 
     override fun handleSearchPostcodesFailure() {
@@ -60,8 +54,8 @@ class MainActivity : AppCompatActivity(), SearchPostcode.ResponseHandler {
     }
 
     fun loading(value: Boolean) {
-        progressBar!!.visibility = if (value) View.VISIBLE else View.GONE
-        listView!!.visibility = if (value) View.GONE else View.VISIBLE
+        searchSpinner.visibility = if (value) View.VISIBLE else View.GONE
+        resultView.visibility = if (value) View.GONE else View.VISIBLE
     }
 
     fun launchDetailView(postcode: String) {
