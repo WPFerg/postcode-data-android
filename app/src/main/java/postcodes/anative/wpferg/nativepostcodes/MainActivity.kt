@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity(), SearchPostcode.ResponseHandler {
 
     fun launchDetailView(postcode: String) {
         val intent = Intent(applicationContext, DetailActivity::class.java)
-        intent.putExtra("POSTCODE", postcode)
+        intent.putExtra(DetailActivity.POSTCODE_KEY, postcode)
         startActivity(intent)
     }
 

@@ -21,7 +21,7 @@ class DetailActivity : AppCompatActivity(), GetPostcodeDetail.ResponseHandler {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        postcode = intent.getStringExtra("POSTCODE")
+        postcode = intent.getStringExtra(POSTCODE_KEY)
         title = getString(R.string.postcode_details_for) + " " + postcode
         listContainer.layoutManager = LinearLayoutManager(this)
 
@@ -37,4 +37,9 @@ class DetailActivity : AppCompatActivity(), GetPostcodeDetail.ResponseHandler {
     override fun handlePostcodeDetailFailure() {
         LOGGER.info("Failed to get postcode details")
     }
+
+    companion object {
+        val POSTCODE_KEY = "POSTCODE"
+    }
+
 }
