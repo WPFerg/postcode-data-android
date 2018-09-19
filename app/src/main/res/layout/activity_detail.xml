@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailActivity">
+    tools:context=".detail.DetailActivity">
 
     <fragment
-        android:name="wpferg.postcodes.android.fragment.PostcodeDetailFragment"
+        android:name="wpferg.postcodes.android.detail.PostcodeDetailFragment"
         android:id="@+id/keyValueFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

@@ -1,4 +1,4 @@
-package wpferg.postcodes.android.fragment
+package wpferg.postcodes.android.util.fragment
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView

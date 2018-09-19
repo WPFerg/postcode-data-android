@@ -1,4 +1,4 @@
-package wpferg.postcodes.android.fragment
+package wpferg.postcodes.android.util.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment

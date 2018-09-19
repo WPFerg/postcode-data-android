@@ -1,11 +1,11 @@
-package wpferg.postcodes.android.fragment
+package wpferg.postcodes.android.detail
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import wpferg.postcodes.android.R
-import wpferg.postcodes.android.domain.PostcodeDetail
-import wpferg.postcodes.android.viewmodel.PostcodeDetailViewModel
+import wpferg.postcodes.android.detail.domain.PostcodeDetail
+import wpferg.postcodes.android.util.fragment.KeyValuePairListFragment
 
 class PostcodeDetailFragment : KeyValuePairListFragment() {
 

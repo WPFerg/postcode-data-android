@@ -1,4 +1,4 @@
-package wpferg.postcodes.android
+package wpferg.postcodes.android.search
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,14 +9,15 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_keyvaluepair.view.*
-import wpferg.postcodes.android.domain.SearchPostcodeResponse
-import wpferg.postcodes.android.http.SearchPostcode
+import wpferg.postcodes.android.R
+import wpferg.postcodes.android.detail.DetailActivity
+import wpferg.postcodes.android.search.domain.SearchPostcodeResponse
+import wpferg.postcodes.android.search.http.SearchPostcode
 import java.util.logging.Logger
 
-class MainActivity : AppCompatActivity() {
+class SearchActivity : AppCompatActivity() {
 
-    val LOGGER = Logger.getLogger(MainActivity::class.java.name)
+    val LOGGER = Logger.getLogger(SearchActivity::class.java.name)
 
     var loadingPostcodeData = false
     var errorLoadingPostcodeData = false

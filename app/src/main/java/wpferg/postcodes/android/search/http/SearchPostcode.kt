@@ -1,8 +1,9 @@
-package wpferg.postcodes.android.http
+package wpferg.postcodes.android.search.http
 
 import com.google.gson.reflect.TypeToken
-import wpferg.postcodes.android.domain.PostcodeResponse
-import wpferg.postcodes.android.domain.SearchPostcodeResponse
+import wpferg.postcodes.android.util.domain.PostcodeResponse
+import wpferg.postcodes.android.search.domain.SearchPostcodeResponse
+import wpferg.postcodes.android.util.http.GenericRequest
 
 class SearchPostcode(val query: String, val successCallback: (SearchPostcodeResponse?) -> Unit, val failureCallback: () -> Unit)
     : GenericRequest<PostcodeResponse<SearchPostcodeResponse?>>() {
