@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("postcodes.anative.wpferg.nativepostcodes", appContext.packageName)
+        assertEquals("wpferg.postcodes.android.detail", appContext.packageName)
     }
 }

@@ -4,7 +4,6 @@
     <string name="search_error">There was an error searching for postcodes</string>
     <string name="search_no_results">No results were found</string>
 
-    <string name="postcode_details_for">Postcode Details for</string>
     <string name="detail_quality">Quality</string>
     <string name="detail_parish">Parish</string>
     <string name="detail_country">Country</string>
@@ -12,4 +11,6 @@
     <string name="detail_european_constituency">European Electoral Region</string>
     <string name="detail_ccg">Clinical Commissioning Group</string>
     <string name="detail_pct">Primary Care Trust</string>
+    <string name="detail_postcode_tab_title">Postcode</string>
+    <string name="detail_crime_tab_title">Crimes</string>
 </resources>
