@@ -1,4 +1,4 @@
-package postcodes.anative.wpferg.nativepostcodes.fragment
+package wpferg.postcodes.android.fragment
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.main.fragment_postcodedetail.view.*
-import postcodes.anative.wpferg.nativepostcodes.R
-import postcodes.anative.wpferg.nativepostcodes.domain.PostcodeDetail
+import wpferg.postcodes.android.R
+import wpferg.postcodes.android.domain.PostcodeDetail
 
 class PostcodeDetailViewAdapter(private val detail: PostcodeDetail, private val context: Context)
     : RecyclerView.Adapter<PostcodeDetailViewAdapter.ViewHolder>() {

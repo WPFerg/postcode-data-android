@@ -1,4 +1,4 @@
-package postcodes.anative.wpferg.nativepostcodes.domain
+package wpferg.postcodes.android.domain
 
 import com.google.gson.annotations.SerializedName
 

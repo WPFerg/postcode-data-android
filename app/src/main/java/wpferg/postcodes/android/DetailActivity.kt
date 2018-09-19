@@ -1,14 +1,12 @@
-package postcodes.anative.wpferg.nativepostcodes
+package wpferg.postcodes.android
 
-import android.app.FragmentTransaction
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_detail.*
-import postcodes.anative.wpferg.nativepostcodes.domain.PostcodeDetail
-import postcodes.anative.wpferg.nativepostcodes.fragment.PostcodeDetailFragment
-import postcodes.anative.wpferg.nativepostcodes.fragment.PostcodeDetailViewAdapter
-import postcodes.anative.wpferg.nativepostcodes.http.GetPostcodeDetail
+import wpferg.postcodes.android.domain.PostcodeDetail
+import wpferg.postcodes.android.fragment.PostcodeDetailViewAdapter
+import wpferg.postcodes.android.http.GetPostcodeDetail
 import java.util.logging.Logger
 
 class DetailActivity : AppCompatActivity() {

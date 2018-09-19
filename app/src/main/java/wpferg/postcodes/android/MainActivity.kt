@@ -1,4 +1,4 @@
-package postcodes.anative.wpferg.nativepostcodes
+package wpferg.postcodes.android
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,10 +6,11 @@ import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_main.*
-import postcodes.anative.wpferg.nativepostcodes.domain.SearchPostcodeResponse
-import postcodes.anative.wpferg.nativepostcodes.http.SearchPostcode
+import wpferg.postcodes.android.domain.SearchPostcodeResponse
+import wpferg.postcodes.android.http.SearchPostcode
 import java.util.logging.Logger
 
 class MainActivity : AppCompatActivity() {

@@ -1,6 +1,5 @@
-package postcodes.anative.wpferg.nativepostcodes.fragment
+package wpferg.postcodes.android.fragment
 
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -8,8 +7,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import postcodes.anative.wpferg.nativepostcodes.R
-import postcodes.anative.wpferg.nativepostcodes.domain.PostcodeDetail
+import wpferg.postcodes.android.R
+import wpferg.postcodes.android.domain.PostcodeDetail
 
 /**
  * A fragment representing a list of Items.

@@ -1,8 +1,7 @@
-package postcodes.anative.wpferg.nativepostcodes.appliication
+package wpferg.postcodes.android.application
 
 import android.app.Application
-import android.util.Log
-import postcodes.anative.wpferg.nativepostcodes.http.GenericRequest
+import wpferg.postcodes.android.http.GenericRequest
 import java.util.logging.Logger
 
 class NativePostcodesApplication : Application() {

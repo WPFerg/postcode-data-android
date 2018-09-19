@@ -1,4 +1,4 @@
-package postcodes.anative.wpferg.nativepostcodes
+package wpferg.postcodes.android
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
