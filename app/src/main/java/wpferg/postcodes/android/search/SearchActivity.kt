@@ -10,11 +10,10 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_search.*
 import wpferg.postcodes.android.R
 import wpferg.postcodes.android.detail.DetailActivity
 import wpferg.postcodes.android.search.domain.SearchPostcodeResponse
-import wpferg.postcodes.android.search.http.SearchPostcode
 import java.util.logging.Logger
 
 class SearchActivity : AppCompatActivity() {
@@ -25,7 +24,7 @@ class SearchActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_search)
         viewModel = ViewModelProviders.of(this).get(SearchViewModel::class.java)
 
         viewModel!!.loading.observe(this, Observer { loading -> updateView() })
