@@ -1,63 +1,35 @@
 package wpferg.postcodes.android
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_detail.*
-import wpferg.postcodes.android.domain.PostcodeDetail
-import wpferg.postcodes.android.fragment.KeyValuePairListFragment
-import wpferg.postcodes.android.http.GetPostcodeDetail
-import java.util.logging.Logger
+import wpferg.postcodes.android.viewmodel.PostcodeDetailViewModel
 
 class DetailActivity : AppCompatActivity() {
 
-    val LOGGER = Logger.getLogger(DetailActivity::class.java.name)
-
-    var postcode: String? = null
-    var postcodeDetailFragment: KeyValuePairListFragment? = null
+    var viewModel: PostcodeDetailViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        postcode = intent.getStringExtra(POSTCODE_KEY)
-        title = getString(R.string.postcode_details_for) + " " + postcode
-        postcodeDetailFragment = keyValueFragment as KeyValuePairListFragment
+        initialiseViewModel()
     }
 
-    override fun onStart() {
-        super.onStart()
+    fun initialiseViewModel() {
+        viewModel = ViewModelProviders.of(this)[PostcodeDetailViewModel::class.java]
 
-        GetPostcodeDetail(postcode!!, this::handlePostcodeDetailSuccess, this::handlePostcodeDetailFailure).execute()
-    }
-
-    fun handlePostcodeDetailSuccess(result: PostcodeDetail?) {
-        LOGGER.info("Got postcode details " + result)
-        if (result != null) {
-            val bundle = Bundle()
-            val convertedDetails = convertDetails(result)
-
-            postcodeDetailFragment!!.definePairs(convertedDetails)
-        }
-    }
-
-    fun handlePostcodeDetailFailure() {
-        LOGGER.info("Failed to get postcode details")
-    }
-
-    fun convertDetails(detail: PostcodeDetail): List<Pair<String, String>> {
-        return listOf(
-            Pair(getString(R.string.detail_quality), detail.quality.toString()),
-            Pair(getString(R.string.detail_parish), detail.parish),
-            Pair(getString(R.string.detail_country), detail.country),
-            Pair(getString(R.string.detail_constituency), detail.parliamentaryConstituency),
-            Pair(getString(R.string.detail_european_constituency), detail.europeanElectoralRegion),
-            Pair(getString(R.string.detail_ccg), detail.ccg),
-            Pair(getString(R.string.detail_pct), detail.primaryCareTrust)
-        )
+        viewModel!!.postcode.observe(this, Observer { postcode -> updateTitle(postcode) })
+        viewModel!!.setPostcode(intent.getStringExtra(POSTCODE_KEY))
     }
 
     companion object {
         val POSTCODE_KEY = "POSTCODE"
+    }
+
+    fun updateTitle(postcode: String?) {
+        title = getString(R.string.postcode_details_for) + " " + postcode
     }
 
 }

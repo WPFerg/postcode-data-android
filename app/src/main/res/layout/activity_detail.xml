@@ -7,7 +7,7 @@
     tools:context=".DetailActivity">
 
     <fragment
-        android:name="wpferg.postcodes.android.fragment.KeyValuePairListFragment"
+        android:name="wpferg.postcodes.android.fragment.PostcodeDetailFragment"
         android:id="@+id/keyValueFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.main.fragment_keyvaluepair.view.*
 import wpferg.postcodes.android.R
-import wpferg.postcodes.android.domain.PostcodeDetail
 
 class KeyValuePairListViewAdapter(private val detail: List<Pair<String, String>>, private val context: Context)
     : RecyclerView.Adapter<KeyValuePairListViewAdapter.ViewHolder>() {

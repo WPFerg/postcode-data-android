@@ -14,7 +14,7 @@ import wpferg.postcodes.android.R
  * Activities containing this fragment MUST implement the
  * [KeyValuePairListFragment.OnListFragmentInteractionListener] interface.
  */
-class KeyValuePairListFragment : Fragment() {
+open class KeyValuePairListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -29,7 +29,7 @@ class KeyValuePairListFragment : Fragment() {
         return view
     }
 
-    fun definePairs(pairs: List<Pair<String, String>>) {
+    fun updateListItems(pairs: List<Pair<String, String>>) {
         if (view is RecyclerView) {
             (view as RecyclerView).adapter = KeyValuePairListViewAdapter(pairs, context!!)
         }
