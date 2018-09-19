@@ -1,40 +1,17 @@
 package postcodes.anative.wpferg.nativepostcodes.http
 
-import com.android.volley.Request
-import com.android.volley.toolbox.StringRequest
-import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import postcodes.anative.wpferg.nativepostcodes.domain.PostcodeResponse
 import postcodes.anative.wpferg.nativepostcodes.domain.SearchPostcodeResponse
-import java.util.logging.Logger
 
-class SearchPostcode {
+class SearchPostcode(val query: String, val successCallback: (SearchPostcodeResponse?) -> Unit, val failureCallback: () -> Unit)
+    : GenericRequest<PostcodeResponse<SearchPostcodeResponse?>>() {
 
-    companion object {
+    private val URL = "http://api.postcodes.io/postcodes/:postcode/autocomplete"
 
-        private val URL = "http://api.postcodes.io/postcodes/:postcode/autocomplete"
-        private val LOGGER = Logger.getLogger(SearchPostcode::class.java.name)
+    override fun execute() = get(URL.replace(":postcode", query))
+    override fun requestSuccess(result: PostcodeResponse<SearchPostcodeResponse?>) = successCallback(result.result)
+    override fun requestError() = failureCallback()
+    override fun typeToken(): TypeToken<PostcodeResponse<SearchPostcodeResponse?>> = object: TypeToken<PostcodeResponse<SearchPostcodeResponse?>>() {}
 
-        fun search(text: String, handler: ResponseHandler) {
-            val queue = GenericRequest.instance!!.requestQueue!!
-            LOGGER.info("Searching for postcodes " + text)
-
-            val request = StringRequest(Request.Method.GET, URL.replace(":postcode", text),
-                {
-                    response -> handler.handleSearchPostcodesSuccess(
-                        Gson().fromJson(response, SearchPostcodeResponse::class.java).result
-                    )
-                },
-                {
-                    error -> handler.handleSearchPostcodesFailure()
-                }
-            )
-
-            queue.add(request)
-        }
-
-    }
-
-    interface ResponseHandler {
-        fun handleSearchPostcodesSuccess(result: Array<String>?)
-        fun handleSearchPostcodesFailure()
-    }
 }

@@ -11,11 +11,11 @@ import postcodes.anative.wpferg.nativepostcodes.fragment.PostcodeDetailViewAdapt
 import postcodes.anative.wpferg.nativepostcodes.http.GetPostcodeDetail
 import java.util.logging.Logger
 
-class DetailActivity : AppCompatActivity(), GetPostcodeDetail.ResponseHandler {
+class DetailActivity : AppCompatActivity() {
 
     val LOGGER = Logger.getLogger(DetailActivity::class.java.name)
 
-    var postcode: String? = null;
+    var postcode: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,16 +25,17 @@ class DetailActivity : AppCompatActivity(), GetPostcodeDetail.ResponseHandler {
         title = getString(R.string.postcode_details_for) + " " + postcode
         listContainer.layoutManager = LinearLayoutManager(this)
 
-        GetPostcodeDetail.search(postcode!!, this)
+        GetPostcodeDetail(postcode!!, this::handlePostcodeDetailSuccess, this::handlePostcodeDetailFailure).execute()
     }
 
-    override fun handlePostcodeDetailSuccess(result: PostcodeDetail) {
+    fun handlePostcodeDetailSuccess(result: PostcodeDetail?) {
         LOGGER.info("Got postcode details " + result)
-        val postcodeDetailFragment = PostcodeDetailFragment();
-        listContainer.adapter = PostcodeDetailViewAdapter(result, baseContext)
+        if (result != null) {
+            listContainer.adapter = PostcodeDetailViewAdapter(result, baseContext)
+        }
     }
 
-    override fun handlePostcodeDetailFailure() {
+    fun handlePostcodeDetailFailure() {
         LOGGER.info("Failed to get postcode details")
     }
 

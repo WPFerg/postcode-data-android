@@ -8,10 +8,11 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.*
 import kotlinx.android.synthetic.main.activity_main.*
+import postcodes.anative.wpferg.nativepostcodes.domain.SearchPostcodeResponse
 import postcodes.anative.wpferg.nativepostcodes.http.SearchPostcode
 import java.util.logging.Logger
 
-class MainActivity : AppCompatActivity(), SearchPostcode.ResponseHandler {
+class MainActivity : AppCompatActivity() {
 
     val LOGGER = Logger.getLogger(MainActivity::class.java.name)
 
@@ -38,17 +39,18 @@ class MainActivity : AppCompatActivity(), SearchPostcode.ResponseHandler {
 
     fun onSearchTextChange(text: String) {
         loading(true)
-        SearchPostcode.search(text, this)
+        SearchPostcode(text, this::handleSearchPostcodesSuccess, this::handleSearchPostcodesFailure)
+            .execute()
     }
 
-    override fun handleSearchPostcodesSuccess(result: Array<String>?) {
+    fun handleSearchPostcodesSuccess(result: SearchPostcodeResponse?) {
         loading(false)
-        val normalisedResult: Array<String> = if (result == null) emptyArray() else result
-        var adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, normalisedResult)
+        val normalisedResult: List<String> = if (result == null) emptyList() else result
+        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, normalisedResult)
         resultView!!.adapter = adapter
     }
 
-    override fun handleSearchPostcodesFailure() {
+    fun handleSearchPostcodesFailure() {
         LOGGER.info("Postcode search failure")
         loading(false)
     }
