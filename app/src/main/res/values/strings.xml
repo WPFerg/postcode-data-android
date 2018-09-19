@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">NativePostcodes</string>
     <string name="search_postcode">Search Postcode</string>
+    <string name="search_error">There was an error searching for postcodes</string>
+    <string name="search_no_results">No results were found</string>
 
     <string name="postcode_details_for">Postcode Details for</string>
     <string name="detail_quality">Quality</string>

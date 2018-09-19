@@ -1,5 +1,7 @@
 package wpferg.postcodes.android.search
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -19,13 +21,16 @@ class SearchActivity : AppCompatActivity() {
 
     val LOGGER = Logger.getLogger(SearchActivity::class.java.name)
 
-    var loadingPostcodeData = false
-    var errorLoadingPostcodeData = false
-    var postcodeResults: SearchPostcodeResponse? = null
+    var viewModel: SearchViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        viewModel = ViewModelProviders.of(this).get(SearchViewModel::class.java)
+
+        viewModel!!.loading.observe(this, Observer { loading -> updateView() })
+        viewModel!!.error.observe(this, Observer { error -> updateView() })
+        viewModel!!.searchResults.observe(this, Observer { results -> handleSearchPostcodesSuccess(results) })
 
         resultView.onItemClickListener = AdapterView.OnItemClickListener {
             adapterView, view, index, p3 -> launchDetailView(adapterView.getItemAtPosition(index) as String)
@@ -39,46 +44,31 @@ class SearchActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(sequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                onSearchTextChange(sequence!!.toString())
+                viewModel!!.search(sequence!!.toString())
             }
         })
     }
 
-    fun onSearchTextChange(text: String) {
-        if (text.length > 0) {
-            SearchPostcode(text, this::handleSearchPostcodesSuccess, this::handleSearchPostcodesFailure)
-                    .execute()
-            loadingPostcodeData = true
-            errorLoadingPostcodeData = false
-        }
-
-        updateView()
-    }
-
     fun updateView() {
-        val hasData = postcodeResults != null && postcodeResults!!.size > 0
-        val inputEmpty = searchPostcode.length() == 0
+        val loading = viewModel!!.loading.value!!
+        val error = viewModel!!.error.value!!
+        val inputText = viewModel!!.searchText.value!!
+        val results = viewModel!!.searchResults.value
 
-        searchSpinner.visibility = if (loadingPostcodeData) View.VISIBLE else View.GONE
-        resultView.visibility = if (!loadingPostcodeData && hasData && !inputEmpty) View.VISIBLE else View.GONE
-        noResultsText.visibility = if ((!loadingPostcodeData || errorLoadingPostcodeData) && !hasData)
-            View.VISIBLE else View.GONE
+        val hasData = results != null && results.isNotEmpty()
+        val inputEmpty = inputText.isEmpty()
 
-        noResultsText.text = if (errorLoadingPostcodeData) "There was an error searching postcodes." else "No results were found"
+        searchSpinner.visibility = if (loading) View.VISIBLE else View.GONE
+        resultView.visibility = if (!loading && hasData && !inputEmpty) View.VISIBLE else View.GONE
+        noResultsText.visibility = if ((!loading || error) && !hasData && !inputEmpty) View.VISIBLE else View.GONE
+
+        noResultsText.text = getString(if (error) R.string.search_error else R.string.search_no_results)
     }
 
     fun handleSearchPostcodesSuccess(result: SearchPostcodeResponse?) {
-        loadingPostcodeData = false
-        postcodeResults = result
         val normalisedResult: List<String> = if (result == null) emptyList() else result
         val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, normalisedResult)
         resultView!!.adapter = adapter
-        updateView()
-    }
-
-    fun handleSearchPostcodesFailure() {
-        loadingPostcodeData = false
-        errorLoadingPostcodeData = true
         updateView()
     }
 
