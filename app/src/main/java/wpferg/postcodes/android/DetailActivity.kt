@@ -22,6 +22,10 @@ class DetailActivity : AppCompatActivity() {
         postcode = intent.getStringExtra(POSTCODE_KEY)
         title = getString(R.string.postcode_details_for) + " " + postcode
         listContainer.layoutManager = LinearLayoutManager(this)
+    }
+
+    override fun onStart() {
+        super.onStart()
 
         GetPostcodeDetail(postcode!!, this::handlePostcodeDetailSuccess, this::handlePostcodeDetailFailure).execute()
     }

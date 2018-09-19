@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_postcodedetail.view.*
 import wpferg.postcodes.android.domain.SearchPostcodeResponse
 import wpferg.postcodes.android.http.SearchPostcode
 import java.util.logging.Logger
@@ -16,6 +17,10 @@ import java.util.logging.Logger
 class MainActivity : AppCompatActivity() {
 
     val LOGGER = Logger.getLogger(MainActivity::class.java.name)
+
+    var loadingPostcodeData = false
+    var errorLoadingPostcodeData = false
+    var postcodeResults: SearchPostcodeResponse? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,26 +44,41 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onSearchTextChange(text: String) {
-        loading(true)
-        SearchPostcode(text, this::handleSearchPostcodesSuccess, this::handleSearchPostcodesFailure)
-            .execute()
+        if (text.length > 0) {
+            SearchPostcode(text, this::handleSearchPostcodesSuccess, this::handleSearchPostcodesFailure)
+                    .execute()
+            loadingPostcodeData = true
+            errorLoadingPostcodeData = false
+        }
+
+        updateView()
+    }
+
+    fun updateView() {
+        val hasData = postcodeResults != null && postcodeResults!!.size > 0
+        val inputEmpty = searchPostcode.length() == 0
+
+        searchSpinner.visibility = if (loadingPostcodeData) View.VISIBLE else View.GONE
+        resultView.visibility = if (!loadingPostcodeData && hasData && !inputEmpty) View.VISIBLE else View.GONE
+        noResultsText.visibility = if ((!loadingPostcodeData || errorLoadingPostcodeData) && !hasData)
+            View.VISIBLE else View.GONE
+
+        noResultsText.text = if (errorLoadingPostcodeData) "There was an error searching postcodes." else "No results were found"
     }
 
     fun handleSearchPostcodesSuccess(result: SearchPostcodeResponse?) {
-        loading(false)
+        loadingPostcodeData = false
+        postcodeResults = result
         val normalisedResult: List<String> = if (result == null) emptyList() else result
         val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, normalisedResult)
         resultView!!.adapter = adapter
+        updateView()
     }
 
     fun handleSearchPostcodesFailure() {
-        LOGGER.info("Postcode search failure")
-        loading(false)
-    }
-
-    fun loading(value: Boolean) {
-        searchSpinner.visibility = if (value) View.VISIBLE else View.GONE
-        resultView.visibility = if (value) View.GONE else View.VISIBLE
+        loadingPostcodeData = false
+        errorLoadingPostcodeData = true
+        updateView()
     }
 
     fun launchDetailView(postcode: String) {

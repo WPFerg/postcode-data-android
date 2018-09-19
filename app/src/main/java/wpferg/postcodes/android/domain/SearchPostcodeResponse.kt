@@ -1,3 +1,3 @@
 package wpferg.postcodes.android.domain
 
-typealias SearchPostcodeResponse = ArrayList<String>
+typealias SearchPostcodeResponse = List<String>
