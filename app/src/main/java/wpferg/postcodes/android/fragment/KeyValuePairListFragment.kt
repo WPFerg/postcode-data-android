@@ -8,20 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import wpferg.postcodes.android.R
-import wpferg.postcodes.android.domain.PostcodeDetail
-import java.util.*
-import java.util.stream.Collectors
-import java.util.stream.IntStream
 
 /**
  * A fragment representing a list of Items.
  * Activities containing this fragment MUST implement the
- * [KeyValuePairListItemFragment.OnListFragmentInteractionListener] interface.
+ * [KeyValuePairListFragment.OnListFragmentInteractionListener] interface.
  */
-class KeyValuePairListItemFragment : Fragment() {
-
-    val TITLES = "TITLES"
-    val VALUES = "VALUES"
+class KeyValuePairListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -31,16 +24,15 @@ class KeyValuePairListItemFragment : Fragment() {
         if (view is RecyclerView) {
             with(view) {
                 layoutManager = LinearLayoutManager(context)
-                adapter = KeyValuePairListViewAdapter(reconstitutePairs(), context)
             }
         }
         return view
     }
 
-    fun reconstitutePairs(): List<Pair<String, String>> {
-        val titles = arguments!!.getStringArray(TITLES)
-        val values = arguments!!.getStringArray(VALUES)
-
-        return titles.zip(values);
+    fun definePairs(pairs: List<Pair<String, String>>) {
+        if (view is RecyclerView) {
+            (view as RecyclerView).adapter = KeyValuePairListViewAdapter(pairs, context!!)
+        }
     }
+
 }
