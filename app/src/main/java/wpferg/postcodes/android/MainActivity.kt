@@ -9,7 +9,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_postcodedetail.view.*
+import kotlinx.android.synthetic.main.fragment_keyvaluepair.view.*
 import wpferg.postcodes.android.domain.SearchPostcodeResponse
 import wpferg.postcodes.android.http.SearchPostcode
 import java.util.logging.Logger
