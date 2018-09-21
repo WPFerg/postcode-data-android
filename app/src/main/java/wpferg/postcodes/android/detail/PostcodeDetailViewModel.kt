@@ -23,8 +23,10 @@ class PostcodeDetailViewModel(application: Application) : AndroidViewModel(appli
     }
 
     fun setPostcode(definedPostcode: String) {
-        postcode.value = definedPostcode
-        PostcodeDetailRequest(definedPostcode, this::handlePostcodeDetailSuccess, this::handlePostcodeDetailFailure).execute()
+        if (!postcode.value.equals(definedPostcode, true)) {
+            postcode.value = definedPostcode
+            PostcodeDetailRequest(definedPostcode, this::handlePostcodeDetailSuccess, this::handlePostcodeDetailFailure).execute()
+        }
     }
 
     private fun handlePostcodeDetailSuccess(result: PostcodeDetail?) {

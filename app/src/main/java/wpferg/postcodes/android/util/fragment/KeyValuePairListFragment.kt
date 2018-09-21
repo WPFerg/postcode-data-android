@@ -9,12 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import wpferg.postcodes.android.R
 
-/**
- * A fragment representing a list of Items.
- * Activities containing this fragment MUST implement the
- * [KeyValuePairListFragment.OnListFragmentInteractionListener] interface.
- */
-open class KeyValuePairListFragment : Fragment() {
+class KeyValuePairListFragment : Fragment() {
+
+    var list: List<Pair<String, String>> = emptyList()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -26,12 +23,18 @@ open class KeyValuePairListFragment : Fragment() {
                 layoutManager = LinearLayoutManager(context)
             }
         }
+        updateViewAdapter(view)
         return view
     }
 
     fun updateListItems(pairs: List<Pair<String, String>>) {
+        list = pairs
+        updateViewAdapter(view)
+    }
+
+    fun updateViewAdapter(view: View?) {
         if (view is RecyclerView) {
-            (view as RecyclerView).adapter = KeyValuePairListViewAdapter(pairs, context!!)
+            view.adapter = KeyValuePairListViewAdapter(list, context!!)
         }
     }
 

@@ -13,6 +13,8 @@ import wpferg.postcodes.android.R
 abstract class LoaderFragment : Fragment() {
 
     var loadComplete = false
+    lateinit var isLoading: MutableLiveData<Boolean?>
+    lateinit var replacement: Fragment
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -21,6 +23,8 @@ abstract class LoaderFragment : Fragment() {
     }
 
     protected fun connect(data: MutableLiveData<Boolean?>, replacement: Fragment) {
+        this.isLoading = data
+        this.replacement = replacement
         data.observe(this, Observer { loading -> if (loading != null && !loading) hasLoaded(replacement) })
     }
 

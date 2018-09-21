@@ -19,12 +19,13 @@ class SearchViewModel : ViewModel() {
     }
 
     fun search(search: String) {
+        val sendRequest = search.isNotEmpty() && !searchText.value.equals(search, true)
         searchText.value = search
-        searchResults.value = null
-        error.value = false
 
-        if (search.length > 0) {
+        if (sendRequest) {
             loading.value = true
+            searchResults.value = null
+            error.value = false
 
             SearchPostcode(search, this::handleSearchSuccess, this::handleSearchFailure)
                     .execute()

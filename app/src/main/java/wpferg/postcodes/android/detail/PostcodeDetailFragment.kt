@@ -16,13 +16,14 @@ class PostcodeDetailFragment : LoaderFragment() {
         super.onCreate(savedInstanceState)
 
         viewModel = ViewModelProviders.of(activity!!)[PostcodeDetailViewModel::class.java]
-    }
-
-    override fun onStart() {
-        connect(viewModel.loading, list)
         viewModel.postcodeSummary.observe(activity!!, Observer { summary -> if (summary != null) updateList(summary) })
+        connect(viewModel.loading, list)
 
-        super.onStart()
+        // Restore any cached data.
+        val postcodeSummary = viewModel.postcodeSummary.value!!
+        if (!viewModel.loading.value!! && postcodeSummary.isNotEmpty()) {
+            updateList(viewModel.postcodeSummary.value!!)
+        }
     }
 
     private fun updateList(detail: PostcodeSummary) = list.updateListItems(detail)
