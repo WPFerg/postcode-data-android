@@ -3,6 +3,7 @@ package wpferg.postcodes.android.util.http
 import android.content.Context
 import com.android.volley.Request
 import com.android.volley.RequestQueue
+import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
@@ -28,7 +29,7 @@ abstract class GenericRequest<T> () {
         LOGGER.fine("Submitting request to " + uri)
         val request = StringRequest(method, uri,
             { response -> processResponse(response) },
-            { response -> processError() }
+            { response -> processError(response) }
         )
 
         queue!!.add(request)
@@ -41,8 +42,8 @@ abstract class GenericRequest<T> () {
         requestSuccess(unmarshalResponse(response))
     }
 
-    private fun processError() {
-        LOGGER.info("Request failed")
+    private fun processError(response: VolleyError) {
+        LOGGER.info("Request failed: " + response.message)
         requestError()
     }
 
