@@ -3,6 +3,8 @@ package wpferg.postcodes.android.detail
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import wpferg.postcodes.android.detail.domain.PostcodeDetail
+import wpferg.postcodes.android.util.fragment.LoaderFragmentManager
 
 class DetailPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
 
