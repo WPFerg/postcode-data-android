@@ -36,11 +36,12 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     // Dagger
-    implementation 'com.google.dagger:dagger:2.10'
-    implementation 'com.google.dagger:dagger-android:2.10'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.10'
-    kapt 'com.google.dagger:dagger-android-processor:2.10'
-    kapt 'com.google.dagger:dagger-compiler:2.10'
+    implementation 'com.google.dagger:dagger:2.15'
+    implementation 'com.google.dagger:dagger-android:2.15'
+    implementation 'com.google.dagger:dagger-android-support:2.15'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.15'
+    kapt 'com.google.dagger:dagger-android-processor:2.15'
+    kapt 'com.google.dagger:dagger-compiler:2.15'
 
     // Lifecycle extensions
     implementation "android.arch.lifecycle:extensions:1.1.1"

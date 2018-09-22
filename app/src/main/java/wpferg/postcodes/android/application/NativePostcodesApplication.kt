@@ -3,12 +3,12 @@ package wpferg.postcodes.android.application
 import android.app.Activity
 import android.app.Application
 import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasDispatchingActivityInjector
+import dagger.android.HasActivityInjector
 import wpferg.postcodes.android.util.http.GenericRequest
 import java.util.logging.Logger
 import javax.inject.Inject
 
-class NativePostcodesApplication : Application(), HasDispatchingActivityInjector {
+class NativePostcodesApplication : Application(), HasActivityInjector {
 
     @Inject
     lateinit var injector: DispatchingAndroidInjector<Activity>
