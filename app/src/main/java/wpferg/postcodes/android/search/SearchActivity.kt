@@ -10,22 +10,29 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_search.*
 import wpferg.postcodes.android.R
 import wpferg.postcodes.android.detail.DetailActivity
 import wpferg.postcodes.android.search.domain.SearchPostcodeResponse
 import java.util.logging.Logger
+import javax.inject.Inject
 
 class SearchActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var viewModelFactory: SearchViewModel.Factory
 
     val LOGGER = Logger.getLogger(SearchActivity::class.java.name)
 
     var viewModel: SearchViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_search)
-        viewModel = ViewModelProviders.of(this).get(SearchViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(SearchViewModel::class.java)
 
         viewModel!!.loading.observe(this, Observer { loading -> updateView() })
         viewModel!!.error.observe(this, Observer { error -> updateView() })
