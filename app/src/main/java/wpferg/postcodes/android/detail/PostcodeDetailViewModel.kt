@@ -1,8 +1,8 @@
 package wpferg.postcodes.android.detail
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import wpferg.postcodes.android.R
 import wpferg.postcodes.android.application.NativePostcodesApplication
 import wpferg.postcodes.android.detail.domain.PostcodeDetail

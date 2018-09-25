@@ -1,8 +1,8 @@
 package wpferg.postcodes.android.search
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import wpferg.postcodes.android.search.domain.SearchPostcodeResponse
 import javax.inject.Inject
 
@@ -46,7 +46,7 @@ class SearchViewModel @Inject constructor(private val searchRepository: SearchRe
 
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(SearchViewModel::class.java)) {
-                return modelClass.cast(searchViewModel)
+                return modelClass.cast(searchViewModel)!!
             }
             throw IllegalArgumentException("Unknown class: " + modelClass.name)
         }

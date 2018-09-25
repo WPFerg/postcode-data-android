@@ -1,8 +1,8 @@
 package wpferg.postcodes.android.detail
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import wpferg.postcodes.android.detail.domain.PostcodeSummary
 import wpferg.postcodes.android.util.fragment.KeyValuePairListFragment
 import wpferg.postcodes.android.util.fragment.LoaderFragment

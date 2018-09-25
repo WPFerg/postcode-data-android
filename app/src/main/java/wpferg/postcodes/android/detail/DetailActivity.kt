@@ -1,9 +1,11 @@
 package wpferg.postcodes.android.detail
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_detail.*
 import wpferg.postcodes.android.R
 
@@ -19,8 +21,9 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.elevation = 0f
 
-        pager.adapter = DetailPagerAdapter(supportFragmentManager)
-        tabs.setupWithViewPager(pager)
+        val viewPager = pager as ViewPager
+        viewPager.adapter = DetailPagerAdapter(supportFragmentManager)
+        (tabs as TabLayout).setupWithViewPager(viewPager)
     }
 
     fun initialiseViewModel() {
